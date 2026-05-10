@@ -140,9 +140,6 @@ Measures prediction error.
 $$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
 **34. What is R² score?**
-
-$$R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}$$
-
 It measures how well the model fits the data.
 
 **35. Ideal value of R² score?**
