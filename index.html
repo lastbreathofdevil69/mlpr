@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notebook Previewer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="tabs" id="tabs"></div>
+      <div class="controls">
+        <input id="search" placeholder="Search labs..." />
+        <button id="themeToggle">Dark</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="meta" id="meta">
+        <h1 id="nb-title">Notebook Preview</h1>
+        <div id="nb-meta"></div>
+      </section>
+
+      <div id="spinner" class="spinner hidden">Loading…</div>
+
+      <section id="notebook" class="notebook"></section>
+    </main>
+
+    <footer class="footer">Mini Jupyter Viewer — no backend required</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="notebook.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
