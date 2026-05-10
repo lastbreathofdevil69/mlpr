@@ -61,7 +61,7 @@ const notebooklist = [
   },
   {
     id: 11,
-    name: 'ML_Lab10_T1_to_T4_00.ipynb',
+    name: 'ML_PRACTICAL_VIVA.md',
     title: 'Lab 10: VIVA QUESTIONS',
     description: "Prepare for your viva with a comprehensive set of questions covering all the topics from the previous labs, designed to test your understanding and readiness."
   }

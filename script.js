@@ -11,6 +11,10 @@ const themeToggle = document.getElementById('themeToggle');
 
 let current = null;
 
+function isMarkdownFile(name){
+  return /\.md$/i.test(name);
+}
+
 function updateDownloadButton(nb){
   if(!nb){
     downloadBtn.href = '#';
@@ -57,8 +61,13 @@ async function loadNotebook(nb, btn){
   try{
     const res = await fetch(`${NB_PATH}/${nb.name}`);
     if(!res.ok) throw new Error(`Could not find ${nb.name}`);
-    const nbData = await res.json();
-    renderNotebook(nbData, nb);
+    if(isMarkdownFile(nb.name)){
+      const markdownText = await res.text();
+      renderMarkdownNotebook(markdownText, nb);
+    }else{
+      const nbData = await res.json();
+      renderNotebook(nbData, nb);
+    }
     current = nb;
     updateDownloadButton(current);
   }catch(err){
@@ -67,6 +76,17 @@ async function loadNotebook(nb, btn){
     notebookEl.innerHTML = `<div class="cell markdown"><em style="color:#ff6b6b;">${err.message}</em></div>`;
     updateDownloadButton(null);
   }finally{showSpinner(false)}
+}
+
+function renderMarkdownNotebook(markdownText, meta){
+  nbTitle.innerText = meta.title;
+  nbMeta.innerText = meta.description;
+
+  const el = document.createElement('article');
+  el.className = 'cell markdown';
+  el.innerHTML = marked.parse(markdownText);
+  el.querySelectorAll('pre code').forEach(block=>hljs.highlightBlock(block));
+  notebookEl.appendChild(el);
 }
 
 function renderNotebook(nb, meta){
