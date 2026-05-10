@@ -6,9 +6,26 @@ const nbTitle = document.getElementById('nb-title');
 const nbMeta = document.getElementById('nb-meta');
 const spinner = document.getElementById('spinner');
 const search = document.getElementById('search');
+const downloadBtn = document.getElementById('downloadBtn');
 const themeToggle = document.getElementById('themeToggle');
 
 let current = null;
+
+function updateDownloadButton(nb){
+  if(!nb){
+    downloadBtn.href = '#';
+    downloadBtn.download = '';
+    downloadBtn.classList.add('is-disabled');
+    downloadBtn.setAttribute('aria-disabled', 'true');
+    return;
+  }
+
+  const filePath = `${NB_PATH}/${nb.name}`;
+  downloadBtn.href = filePath;
+  downloadBtn.download = nb.name;
+  downloadBtn.classList.remove('is-disabled');
+  downloadBtn.setAttribute('aria-disabled', 'false');
+}
 
 function makeTabs(){
   notebooklist.forEach(nb => {
@@ -36,16 +53,19 @@ async function loadNotebook(nb, btn){
   notebookEl.innerHTML='';
   nbTitle.innerText = `Loading ${nb.title}...`;
   nbMeta.innerText='';
+  updateDownloadButton(null);
   try{
     const res = await fetch(`${NB_PATH}/${nb.name}`);
     if(!res.ok) throw new Error(`Could not find ${nb.name}`);
     const nbData = await res.json();
     renderNotebook(nbData, nb);
-    current = nb.name;
+    current = nb;
+    updateDownloadButton(current);
   }catch(err){
     nbTitle.innerText = `Error: ${nb.title}`;
     nbMeta.innerText = nb.description;
     notebookEl.innerHTML = `<div class="cell markdown"><em style="color:#ff6b6b;">${err.message}</em></div>`;
+    updateDownloadButton(null);
   }finally{showSpinner(false)}
 }
 

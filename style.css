@@ -18,8 +18,10 @@ html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Helvetica,Ar
 .controls{display:flex;gap:8px;align-items:center}
 #search{padding:8px 10px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-family:inherit}
 #search::placeholder{color:var(--muted);opacity:0.6}
+#downloadBtn,#themeToggle{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted);cursor:pointer;font-family:inherit;transition:all .18s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+#downloadBtn:hover:not(.is-disabled),#themeToggle:hover{background:var(--glass);border-color:var(--accent);color:var(--accent);transform:scale(1.05)}
+#downloadBtn.is-disabled{opacity:0.45;pointer-events:none}
 #themeToggle{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted);cursor:pointer;font-family:inherit;transition:all .18s ease}
-#themeToggle:hover{background:var(--glass);border-color:var(--accent);color:var(--accent);transform:scale(1.05)}
 .container{max-width:980px;margin:28px auto;padding:18px}
 .meta{margin-bottom:12px}
 #nb-title{margin:0 0 6px 0;font-size:20px}

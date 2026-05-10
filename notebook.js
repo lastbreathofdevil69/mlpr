@@ -58,5 +58,11 @@ const notebooklist = [
     name: 'ML_Lab9_T1_to_T4_00.ipynb',
     title: 'Lab 9: Advanced Topics & Applications',
     description: 'Explore advanced ML topics including neural networks, deep learning basics, and real-world applications.'
+  },
+  {
+    id: 11,
+    name: 'ML_Lab10_T1_to_T4_00.ipynb',
+    title: 'Lab 10: VIVA QUESTIONS',
+    description: "Prepare for your viva with a comprehensive set of questions covering all the topics from the previous labs, designed to test your understanding and readiness."
   }
 ];
