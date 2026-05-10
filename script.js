@@ -15,6 +15,16 @@ function isMarkdownFile(name){
   return /\.md$/i.test(name);
 }
 
+async function typesetMath(root){
+  if(window.MathJax?.typesetPromise){
+    try{
+      await window.MathJax.typesetPromise([root]);
+    }catch(_err){
+      // If math rendering fails, keep the markdown visible instead of breaking the page.
+    }
+  }
+}
+
 function updateDownloadButton(nb){
   if(!nb){
     downloadBtn.href = '#';
@@ -87,6 +97,7 @@ function renderMarkdownNotebook(markdownText, meta){
   el.innerHTML = marked.parse(markdownText);
   el.querySelectorAll('pre code').forEach(block=>hljs.highlightBlock(block));
   notebookEl.appendChild(el);
+  typesetMath(el);
 }
 
 function renderNotebook(nb, meta){
@@ -102,6 +113,7 @@ function renderNotebook(nb, meta){
       const html = marked.parse(md);
       el.innerHTML = html;
       el.querySelectorAll('pre code').forEach(block=>hljs.highlightBlock(block));
+      typesetMath(el);
     }
     // code
     else if(c.cell_type === 'code'){
