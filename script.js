@@ -18,6 +18,10 @@ function isMarkdownFile(name){
 async function typesetMath(root){
   if(window.MathJax?.typesetPromise){
     try{
+      if(window.MathJax.typesetClear){
+        window.MathJax.typesetClear([root]);
+      }
+      await new Promise(resolve=>requestAnimationFrame(resolve));
       await window.MathJax.typesetPromise([root]);
     }catch(_err){
       // If math rendering fails, keep the markdown visible instead of breaking the page.
